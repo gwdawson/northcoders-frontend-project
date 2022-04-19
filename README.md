@@ -8,7 +8,7 @@ This sprint should consolidate your understanding of making a [C.R.U.D](https://
 
 ## Kanban
 
-### Link to your Trello Board here: https://trello.com/b/cEYt2hYP
+### Link to your Trello Board here: https://trello.com/b/WH6YA5m2
 
 To keep track of the tasks involved in this project we're going to use a kanban board. Ensure that you work on one _ticket_ at time. You can click on the ticket to find out more information about what is required for the feature. A ticket is not considered complete unless both the happy path and errors response are handled and there is a basic structure to your styling.
 
