@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { makeRequest } from '../utils/api';
+import { getAllArticles } from '../utils/api';
 import '../styles/App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
@@ -8,7 +8,7 @@ export default function Articles() {
   const [articles, setArticles] = React.useState([]);
 
   useEffect(() => {
-    makeRequest(setArticles);
+    getAllArticles(setArticles);
   }, []);
 
   return (
