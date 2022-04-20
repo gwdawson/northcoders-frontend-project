@@ -1,15 +1,26 @@
-import React, { useEffect } from 'react';
-import { getAllArticles } from '../utils/api';
+import React, { useState, useEffect } from 'react';
+import { getAllArticles, getArticleByTopic } from '../utils/api';
+import { useParams } from 'react-router-dom';
 import '../styles/App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
 
 export default function Articles() {
-  const [articles, setArticles] = React.useState([]);
+  const { topic } = useParams();
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    getAllArticles(setArticles);
-  }, []);
+    const makeAsync = async () => {
+      let articles = undefined;
+      if (topic === undefined) {
+        articles = await getAllArticles();
+      } else {
+        articles = await getArticleByTopic(topic);
+      }
+      setArticles(articles);
+    };
+    makeAsync();
+  }, [topic]);
 
   return (
     <div className='Articles'>

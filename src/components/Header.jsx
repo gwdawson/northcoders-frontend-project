@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import '../styles/App.css';
 
 export default function Header() {
-  return <h1 className='Header'>All Articles</h1>;
+  const { pathname } = useLocation();
+  let topic = undefined;
+
+  if (pathname === '/') topic = 'All';
+  else topic = pathname.split('/')[2];
+
+  const first = topic[0].toUpperCase();
+  const rest = topic.slice(1);
+  const newTopic = first + rest;
+
+  return <h1 className='Header'>{newTopic} Articles</h1>;
 }
