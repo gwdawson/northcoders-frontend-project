@@ -61,3 +61,7 @@ html {
   font-size: 0.7em;
   color: #969696;
 }
+.ArticleLink {
+  color: var(--text-default);
+  text-decoration: none;
+}
