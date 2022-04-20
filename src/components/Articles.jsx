@@ -24,7 +24,7 @@ export default function Articles() {
   return (
     <div className='Articles'>
       {articles.map((article) => (
-        <div className='Article'>
+        <div className='Article' key={article.article_id}>
           <h3 className='ArticleTitle'>
             {article.title} <span className='ArticleAuthor'>— {article.author}</span>
           </h3>
