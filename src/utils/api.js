@@ -13,3 +13,9 @@ export const getArticleByTopic = async (topic) => {
   const { data } = await backend.get(`/articles?topic=${topic}`);
   return data.articles;
 };
+
+export const getAllTopics = async () => {
+  const { data } = await backend.get('/topics');
+  console.log(data.topics);
+  return data.topics;
+};
