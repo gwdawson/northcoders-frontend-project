@@ -3,6 +3,7 @@ import { getAllArticles, getArticleByTopic, getArticleById } from '../utils/api'
 import { Link, useParams } from 'react-router-dom';
 import '../styles/App.css';
 import Tilt from 'react-parallax-tilt';
+import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,8 +13,10 @@ export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isArticle, setIsArticle] = useState(false);
   const [article, setArticle] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     setIsArticle(false);
     const makeAsync = async () => {
       let articles = undefined;
@@ -23,12 +26,12 @@ export default function Articles() {
         articles = await getArticleByTopic(topic);
       }
       setArticles(articles);
-
       if (article_id !== undefined) {
         setIsArticle(true);
         const article = await getArticleById(article_id);
         setArticle(article);
       }
+      setLoading(false);
     };
     makeAsync();
   }, [topic, article_id]);
@@ -45,6 +48,10 @@ export default function Articles() {
         <h2>COMMENTS: {article.comment_count}</h2>
       </>
     );
+
+  if (loading) {
+    return <ReactLoading className='LoadingSymbol' type='spinningBubbles' color='#ffffff' />;
+  }
 
   return (
     <div className='Articles'>
