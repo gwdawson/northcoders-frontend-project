@@ -28,3 +28,9 @@ export const getCommentsByArticleId = async (article_id) => {
   const { data } = await backend.get(`/articles/${article_id}/comments`);
   return data.comments;
 };
+export const increaseVotesByOne = async (article_id) => {
+  const { data } = await backend.patch(`/articles/${article_id}`, {
+    inc_votes: 1,
+  });
+  return data.article;
+};
