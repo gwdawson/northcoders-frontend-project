@@ -16,7 +16,7 @@ export default function Nav() {
 
   return (
     <div className='Nav'>
-      <Link className='NavChild' to='/'>
+      <Link key='all' className='NavChild' to='/'>
         All
       </Link>
       {topics.map((topic) => {
@@ -24,7 +24,7 @@ export default function Nav() {
         const rest = topic.slug.slice(1);
         const newTopic = first + rest;
         return (
-          <Link className='NavChild' to={`/topics/${topic.slug}`}>
+          <Link key={topic.slug} className='NavChild' to={`/topics/${topic.slug}`}>
             {newTopic}
           </Link>
         );

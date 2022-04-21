@@ -13,5 +13,7 @@ export default function Header() {
   const rest = topic.slice(1);
   const newTopic = first + rest;
 
+  if (!isNaN(parseInt(first))) return null;
+
   return <h1 className='Header'>{newTopic} Articles</h1>;
 }
