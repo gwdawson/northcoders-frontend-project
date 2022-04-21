@@ -23,3 +23,10 @@ export const getArticleById = async (article_id) => {
   const { data } = await backend.get(`/articles/${article_id}`);
   return data.article;
 };
+
+export const increaseVotesByOne = async (article_id) => {
+  const { data } = await backend.patch(`/articles/${article_id}`, {
+    inc_votes: 1,
+  });
+  return data.article;
+};

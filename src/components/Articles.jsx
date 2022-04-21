@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllArticles, getArticleByTopic, getArticleById } from '../utils/api';
+import { getAllArticles, getArticleByTopic, getArticleById, increaseVotesByOne } from '../utils/api';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/App.css';
 import Tilt from 'react-parallax-tilt';
@@ -36,6 +36,11 @@ export default function Articles() {
     makeAsync();
   }, [topic, article_id]);
 
+  function incLikes() {
+    setArticle({ ...article, votes: article.votes + 1 });
+    increaseVotesByOne(article_id);
+  }
+
   if (isArticle)
     return (
       <>
@@ -46,10 +51,17 @@ export default function Articles() {
           </span>
         </h1>
         <h2 className='ArticleBody'>{article.body}</h2>
+        <h3>
+          Likes: {article.votes}, Comments: {article.comment_count}
+        </h3>
+        <br />
         <p>
-          <FontAwesomeIcon icon={faThumbsUp} /> Leave a like!
-          <br />
-          <FontAwesomeIcon icon={faMessage} /> Leave a comment!
+          <button className='ArticleButton' onClick={() => incLikes()}>
+            <FontAwesomeIcon icon={faThumbsUp} /> Leave a like!
+          </button>
+          <button className='ArticleButton' onClick={() => console.log('todo: add comment')}>
+            <FontAwesomeIcon icon={faMessage} /> Leave a comment!
+          </button>
         </p>
       </>
     );

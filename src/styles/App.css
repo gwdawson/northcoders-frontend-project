@@ -70,6 +70,18 @@ html {
   color: var(--text-default);
   text-decoration: none;
 }
+.ArticleButton {
+  color: var(--text-default);
+  background: transparent;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 8px;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.ArticleButton:last-child {
+  margin-right: 0px;
+}
 .ArticleBody {
   position: relative;
   max-width: 1000px;
@@ -77,6 +89,7 @@ html {
   transform: translateX(-50%);
   margin-bottom: 30px;
 }
+
 .LoadingSymbol {
   position: absolute;
   width: 100px;
