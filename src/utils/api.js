@@ -16,6 +16,10 @@ export const getArticleByTopic = async (topic) => {
 
 export const getAllTopics = async () => {
   const { data } = await backend.get('/topics');
-  console.log(data.topics);
   return data.topics;
+};
+
+export const getArticleById = async (article_id) => {
+  const { data } = await backend.get(`/articles/${article_id}`);
+  return data.article;
 };

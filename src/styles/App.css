@@ -37,8 +37,12 @@ html {
   margin-right: 0px;
 }
 .Header {
+  position: relative;
   font-size: 3em;
   margin: 30px;
+  max-width: 1000px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .Articles {
@@ -51,6 +55,7 @@ html {
   margin: 10px;
   padding: 12px;
   width: 350px;
+  height: 125px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -61,7 +66,17 @@ html {
   font-size: 0.7em;
   color: #969696;
 }
-
+.ArticleLink {
+  color: var(--text-default);
+  text-decoration: none;
+}
+.ArticleBody {
+  position: relative;
+  max-width: 1000px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 30px;
+}
 .LoadingSymbol {
   position: absolute;
   width: 100px;
