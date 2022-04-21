@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllArticles, getArticleByTopic, getArticleById } from '../utils/api';
+import { getAllArticles, getArticleByTopic, getArticleById, getCommentsByArticleId } from '../utils/api';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/App.css';
 import Tilt from 'react-parallax-tilt';
@@ -13,6 +13,7 @@ export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isArticle, setIsArticle] = useState(false);
   const [article, setArticle] = useState({});
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -30,6 +31,8 @@ export default function Articles() {
         setIsArticle(true);
         const article = await getArticleById(article_id);
         setArticle(article);
+        const comments = await getCommentsByArticleId(article_id);
+        setComments(comments);
       }
       setLoading(false);
     };
@@ -51,6 +54,17 @@ export default function Articles() {
           <br />
           <FontAwesomeIcon icon={faMessage} /> Leave a comment!
         </p>
+        <div className='ArticleComments'>
+          <h3>Comments</h3>
+          {comments.map((comment) => {
+            return (
+              <div className='ArticleComment' key={comment.comment_id}>
+                <h3>{comment.author}</h3>
+                <p>{comment.body}</p>
+              </div>
+            );
+          })}
+        </div>
       </>
     );
 
