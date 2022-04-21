@@ -51,6 +51,7 @@ html {
   margin: 10px;
   padding: 12px;
   width: 350px;
+  height: 125px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -64,4 +65,11 @@ html {
 .ArticleLink {
   color: var(--text-default);
   text-decoration: none;
+}
+.ArticleBody {
+  position: relative;
+  max-width: 1000px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 30px;
 }
