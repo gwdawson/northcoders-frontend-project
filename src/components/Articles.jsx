@@ -39,13 +39,18 @@ export default function Articles() {
   if (isArticle)
     return (
       <>
-        <h1 className='Header'>{article.title}</h1>
+        <h1 className='Header'>
+          {article.title}{' '}
+          <span className='ArticleAuthor'>
+            — @{article.author} #{article.topic}
+          </span>
+        </h1>
         <h2 className='ArticleBody'>{article.body}</h2>
-        <h2>
-          #{article.topic} | <FontAwesomeIcon icon={faThumbsUp} /> {article.votes} | @{article.author} |{' '}
-          {article.created_at} | #{article.article_id}
-        </h2>
-        <h2>COMMENTS: {article.comment_count}</h2>
+        <p>
+          <FontAwesomeIcon icon={faThumbsUp} /> Leave a like!
+          <br />
+          <FontAwesomeIcon icon={faMessage} /> Leave a comment!
+        </p>
       </>
     );
 
