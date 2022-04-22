@@ -30,3 +30,8 @@ export const increaseVotesByOne = async (article_id) => {
   });
   return data.article;
 };
+
+export const getAllUsers = async () => {
+  const { data } = await backend.get('/users');
+  return data.users;
+};

@@ -36,6 +36,12 @@ html {
 .NavChild:last-child {
   margin-right: 0px;
 }
+.NavUser {
+  /* position: absolute; */
+  /* right: 5px; */
+  /* block-size: fit-content; */
+}
+
 .Header {
   position: relative;
   font-size: 3em;
