@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getAllTopics } from '../utils/api';
 import '../styles/App.css';
 
-export default function Nav({ user }) {
+export default function Nav() {
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
@@ -31,7 +31,6 @@ export default function Nav({ user }) {
           );
         })}
       </div>
-      <h3 className='NavUser'>Logged in as: {user.username}</h3>
     </>
   );
 }

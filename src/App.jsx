@@ -13,19 +13,26 @@ import { getAllUsers } from './utils/api';
 // <ToastContainer />
 
 function App() {
+  const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
 
   useEffect(() => {
     const makeAsync = async () => {
       const users = await getAllUsers();
-      setUser(users[Math.floor(Math.random() * users.length)]);
+      setUsers(users);
     };
     makeAsync();
   }, []);
 
   return (
     <div className='App'>
-      <Nav user={user} />
+      <Nav />
+      {users.includes(user) && <h3 className='User'>Logged in as: {user.username}</h3>}
+      {!users.includes(user) && (
+        <button className='UserLoginButton' onClick={() => setUser(users[Math.floor(Math.random() * users.length)])}>
+          LOGIN
+        </button>
+      )}
       <Header />
       <Routes>
         <Route path='/' element={<Articles />}></Route>

@@ -36,8 +36,19 @@ html {
 .NavChild:last-child {
   margin-right: 0px;
 }
-.NavUser {
+
+.User {
   margin-top: 15px;
+}
+.UserLoginButton {
+  margin-top: 10px;
+  width: 300px;
+  padding: 10px;
+  color: #ff10ef;
+  background: transparent;
+  border: 1px solid #ff10ef;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .Header {
