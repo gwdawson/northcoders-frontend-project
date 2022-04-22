@@ -74,7 +74,7 @@ export default function Articles() {
             setShowComments((prev) => !prev);
           }}
         >
-          <FontAwesomeIcon icon={faMessage} /> Leave a comment!
+          <FontAwesomeIcon icon={faMessage} /> {showComments ? 'Hide comments!' : 'Show comments!'}
         </button>
         {showComments && (
           <div className='ArticleComments'>
