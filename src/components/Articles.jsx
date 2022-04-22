@@ -12,8 +12,10 @@ import Tilt from 'react-parallax-tilt';
 import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export default function Articles() {
+export default function Articles({ loggedIn }) {
   const { topic } = useParams();
   const { article_id } = useParams();
   const [articles, setArticles] = useState([]);
@@ -24,6 +26,8 @@ export default function Articles() {
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState('created_at');
   const [sortOrder, setSortOrder] = useState('DESC');
+
+  const notifyLike = () => toast('You must be logged in to like this article!');
 
   useEffect(() => {
     setLoading(true);
@@ -56,6 +60,7 @@ export default function Articles() {
   if (isArticle)
     return (
       <>
+        <ToastContainer />
         <h1 className='Header'>
           {article.title}{' '}
           <span className='ArticleAuthor'>
@@ -67,7 +72,12 @@ export default function Articles() {
           Likes: {article.votes}, Comments: {article.comment_count}
         </h3>
         <br />
-        <button className='ArticleButton' onClick={() => incLikes()}>
+        <button
+          className='ArticleButton'
+          onClick={() => {
+            loggedIn ? incLikes() : notifyLike();
+          }}
+        >
           <FontAwesomeIcon icon={faThumbsUp} /> Leave a like!
         </button>
         <button
@@ -102,24 +112,14 @@ export default function Articles() {
 
   return (
     <>
-      <select className='form-select' onChange={(e) => setSortBy(e.target.value)}>
-        <option value='created_at' selected={sortBy === 'created_at'}>
-          Date
-        </option>
-        <option value='comment_count' selected={sortBy === 'comment_count'}>
-          Comment Count
-        </option>
-        <option value='votes' selected={sortBy === 'votes'}>
-          Votes
-        </option>
+      <select value={sortBy} className='form-select' onChange={(e) => setSortBy(e.target.value)}>
+        <option value='created_at'>Date</option>
+        <option value='comment_count'>Comment Count</option>
+        <option value='votes'>Votes</option>
       </select>
-      <select className='form-select' onChange={(e) => setSortOrder(e.target.value)}>
-        <option value='DESC' selected={sortOrder === 'DESC'}>
-          Descending
-        </option>
-        <option value='ASC' selected={sortOrder === 'ASC'}>
-          Ascending
-        </option>
+      <select value={sortOrder} className='form-select' onChange={(e) => setSortOrder(e.target.value)}>
+        <option value='DESC'>Descending</option>
+        <option value='ASC'>Ascending</option>
       </select>
       <div className='Articles'>
         {articles.map((article) => (

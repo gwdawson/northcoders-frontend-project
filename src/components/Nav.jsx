@@ -15,20 +15,22 @@ export default function Nav() {
   }, []);
 
   return (
-    <div className='Nav'>
-      <Link key='all' className='NavChild' to='/'>
-        All
-      </Link>
-      {topics.map((topic) => {
-        const first = topic.slug[0].toUpperCase();
-        const rest = topic.slug.slice(1);
-        const newTopic = first + rest;
-        return (
-          <Link key={topic.slug} className='NavChild' to={`/topics/${topic.slug}`}>
-            {newTopic}
-          </Link>
-        );
-      })}
-    </div>
+    <>
+      <div className='Nav'>
+        <Link key='all' className='NavChild' to='/'>
+          All
+        </Link>
+        {topics.map((topic) => {
+          const first = topic.slug[0].toUpperCase();
+          const rest = topic.slug.slice(1);
+          const newTopic = first + rest;
+          return (
+            <Link key={topic.slug} className='NavChild' to={`/topics/${topic.slug}`}>
+              {newTopic}
+            </Link>
+          );
+        })}
+      </div>
+    </>
   );
 }
