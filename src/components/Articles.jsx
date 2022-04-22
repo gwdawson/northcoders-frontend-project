@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getAllArticles, getArticleByTopic, getArticleById, increaseVotesByOne } from '../utils/api';
+import {
+  getAllArticles,
+  getArticleByTopic,
+  getArticleById,
+  getCommentsByArticleId,
+  increaseVotesByOne,
+} from '../utils/api';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/App.css';
 import Tilt from 'react-parallax-tilt';
@@ -13,6 +19,8 @@ export default function Articles() {
   const [articles, setArticles] = useState([]);
   const [isArticle, setIsArticle] = useState(false);
   const [article, setArticle] = useState({});
+  const [comments, setComments] = useState([]);
+  const [showComments, setShowComments] = useState(false);
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState('created_at');
   const [sortOrder, setSortOrder] = useState('DESC');
@@ -32,6 +40,8 @@ export default function Articles() {
         setIsArticle(true);
         const article = await getArticleById(article_id);
         setArticle(article);
+        const comments = await getCommentsByArticleId(article_id);
+        setComments(comments);
       }
       setLoading(false);
     };
@@ -57,14 +67,32 @@ export default function Articles() {
           Likes: {article.votes}, Comments: {article.comment_count}
         </h3>
         <br />
-        <p>
-          <button className='ArticleButton' onClick={() => incLikes()}>
-            <FontAwesomeIcon icon={faThumbsUp} /> Leave a like!
-          </button>
-          <button className='ArticleButton' onClick={() => console.log('todo: add comment')}>
-            <FontAwesomeIcon icon={faMessage} /> Leave a comment!
-          </button>
-        </p>
+        <button className='ArticleButton' onClick={() => incLikes()}>
+          <FontAwesomeIcon icon={faThumbsUp} /> Leave a like!
+        </button>
+        <button
+          className='ArticleButton'
+          onClick={() => {
+            setShowComments((prev) => !prev);
+          }}
+        >
+          <FontAwesomeIcon icon={faMessage} /> {showComments ? 'Hide comments!' : 'Show comments!'}
+        </button>
+        {showComments && (
+          <div className='ArticleComments'>
+            {comments.map((comment) => {
+              return (
+                <div className='ArticleComment' key={comment.comment_id}>
+                  <h3>{comment.author}</h3>
+                  <p>{comment.body}</p>
+                  <p>
+                    <FontAwesomeIcon icon={faThumbsUp} /> {comment.votes}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </>
     );
 
