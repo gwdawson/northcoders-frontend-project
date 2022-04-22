@@ -6,6 +6,12 @@ import './styles/App.css';
 import { useEffect, useState } from 'react';
 import { getAllUsers } from './utils/api';
 
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// const notify = () => toast('You must be logged in to view this page');
+// <button onClick={notify}>Test!!!</button>
+// <ToastContainer />
+
 function App() {
   const [user, setUser] = useState({});
 

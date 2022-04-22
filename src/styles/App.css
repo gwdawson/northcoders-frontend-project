@@ -37,9 +37,7 @@ html {
   margin-right: 0px;
 }
 .NavUser {
-  /* position: absolute; */
-  /* right: 5px; */
-  /* block-size: fit-content; */
+  margin-top: 15px;
 }
 
 .Header {
