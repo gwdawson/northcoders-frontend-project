@@ -11,7 +11,7 @@ import '../styles/App.css';
 import Tilt from 'react-parallax-tilt';
 import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLaptopHouse, faMessage, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faMessage, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function Articles() {
   const { topic } = useParams();
@@ -22,8 +22,6 @@ export default function Articles() {
   const [comments, setComments] = useState([]);
   const [showComments, setShowComments] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  console.log(showComments, 'sc');
 
   useEffect(() => {
     setLoading(true);
