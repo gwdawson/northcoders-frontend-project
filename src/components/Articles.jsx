@@ -73,12 +73,14 @@ export default function Articles() {
           </button>
         </p>
         <div className='ArticleComments'>
-          <h3>Comments</h3>
           {comments.map((comment) => {
             return (
               <div className='ArticleComment' key={comment.comment_id}>
                 <h3>{comment.author}</h3>
                 <p>{comment.body}</p>
+                <p>
+                  <FontAwesomeIcon icon={faThumbsUp} /> {comment.votes}
+                </p>
               </div>
             );
           })}

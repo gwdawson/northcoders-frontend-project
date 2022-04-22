@@ -89,6 +89,20 @@ html {
   transform: translateX(-50%);
   margin-bottom: 30px;
 }
+.ArticleComments {
+  position: relative;
+  margin-top: 30px;
+  padding: 15px;
+  text-align: left;
+  max-width: 1300px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid white;
+  border-radius: 20px;
+}
+.ArticleComment {
+  margin-bottom: 20px;
+}
 
 .LoadingSymbol {
   position: absolute;
