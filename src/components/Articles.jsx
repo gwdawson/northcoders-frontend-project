@@ -112,24 +112,14 @@ export default function Articles({ loggedIn }) {
 
   return (
     <>
-      <select className='form-select' onChange={(e) => setSortBy(e.target.value)}>
-        <option value='created_at' selected={sortBy === 'created_at'}>
-          Date
-        </option>
-        <option value='comment_count' selected={sortBy === 'comment_count'}>
-          Comment Count
-        </option>
-        <option value='votes' selected={sortBy === 'votes'}>
-          Votes
-        </option>
+      <select value={sortBy} className='form-select' onChange={(e) => setSortBy(e.target.value)}>
+        <option value='created_at'>Date</option>
+        <option value='comment_count'>Comment Count</option>
+        <option value='votes'>Votes</option>
       </select>
-      <select className='form-select' onChange={(e) => setSortOrder(e.target.value)}>
-        <option value='DESC' selected={sortOrder === 'DESC'}>
-          Descending
-        </option>
-        <option value='ASC' selected={sortOrder === 'ASC'}>
-          Ascending
-        </option>
+      <select value={sortOrder} className='form-select' onChange={(e) => setSortOrder(e.target.value)}>
+        <option value='DESC'>Descending</option>
+        <option value='ASC'>Ascending</option>
       </select>
       <div className='Articles'>
         {articles.map((article) => (
