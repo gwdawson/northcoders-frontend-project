@@ -45,7 +45,7 @@ html {
 .Header {
   position: relative;
   font-size: 3em;
-  margin: 30px;
+  margin: 30px 0px;
   max-width: 1000px;
   left: 50%;
   transform: translateX(-50%);
@@ -94,6 +94,16 @@ html {
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 30px;
+}
+
+.form-select {
+  margin: 20px 10px;
+  padding: 15px;
+  width: 300px;
+  background: transparent;
+  color: var(--text-default);
+  border: 1px solid var(--text-default);
+  border-radius: 5px;
 }
 
 .LoadingSymbol {

@@ -14,6 +14,8 @@ export default function Articles() {
   const [isArticle, setIsArticle] = useState(false);
   const [article, setArticle] = useState({});
   const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState('created_at');
+  const [sortOrder, setSortOrder] = useState('DESC');
 
   useEffect(() => {
     setLoading(true);
@@ -21,9 +23,9 @@ export default function Articles() {
     const makeAsync = async () => {
       let articles = undefined;
       if (topic === undefined) {
-        articles = await getAllArticles();
+        articles = await getAllArticles(sortBy, sortOrder);
       } else {
-        articles = await getArticleByTopic(topic);
+        articles = await getArticleByTopic(topic, sortBy, sortOrder);
       }
       setArticles(articles);
       if (article_id !== undefined) {
@@ -34,7 +36,7 @@ export default function Articles() {
       setLoading(false);
     };
     makeAsync();
-  }, [topic, article_id]);
+  }, [topic, article_id, sortBy, sortOrder]);
 
   function incLikes() {
     setArticle({ ...article, votes: article.votes + 1 });
@@ -71,23 +73,44 @@ export default function Articles() {
   }
 
   return (
-    <div className='Articles'>
-      {articles.map((article) => (
-        <Tilt key={article.article_id}>
-          <Link className='ArticleLink' to={`/articles/${article.article_id}`}>
-            <div className='Article'>
-              <h3 className='ArticleTitle'>
-                {article.title} <span className='ArticleAuthor'>— {article.author}</span>
-              </h3>
-              <p>
-                <FontAwesomeIcon icon={faMessage} /> {article.comment_count}
-                {' — '}
-                <FontAwesomeIcon icon={faThumbsUp} /> {article.votes}
-              </p>
-            </div>
-          </Link>
-        </Tilt>
-      ))}
-    </div>
+    <>
+      <select className='form-select' onChange={(e) => setSortBy(e.target.value)}>
+        <option value='created_at' selected={sortBy === 'created_at'}>
+          Date
+        </option>
+        <option value='comment_count' selected={sortBy === 'comment_count'}>
+          Comment Count
+        </option>
+        <option value='votes' selected={sortBy === 'votes'}>
+          Votes
+        </option>
+      </select>
+      <select className='form-select' onChange={(e) => setSortOrder(e.target.value)}>
+        <option value='DESC' selected={sortOrder === 'DESC'}>
+          Descending
+        </option>
+        <option value='ASC' selected={sortOrder === 'ASC'}>
+          Ascending
+        </option>
+      </select>
+      <div className='Articles'>
+        {articles.map((article) => (
+          <Tilt key={article.article_id}>
+            <Link className='ArticleLink' to={`/articles/${article.article_id}`}>
+              <div className='Article'>
+                <h3 className='ArticleTitle'>
+                  {article.title} <span className='ArticleAuthor'>— {article.author}</span>
+                </h3>
+                <p>
+                  <FontAwesomeIcon icon={faMessage} /> {article.comment_count}
+                  {' — '}
+                  <FontAwesomeIcon icon={faThumbsUp} /> {article.votes}
+                </p>
+              </div>
+            </Link>
+          </Tilt>
+        ))}
+      </div>
+    </>
   );
 }

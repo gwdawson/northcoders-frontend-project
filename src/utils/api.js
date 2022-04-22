@@ -4,13 +4,13 @@ const backend = axios.create({
   baseURL: 'https://northcoders-news-api-v2.herokuapp.com/api',
 });
 
-export const getAllArticles = async () => {
-  const { data } = await backend.get('/articles');
+export const getAllArticles = async (sortBy, sortOrder) => {
+  const { data } = await backend.get(`/articles?sort_by=${sortBy}&order=${sortOrder}`);
   return data.articles;
 };
 
-export const getArticleByTopic = async (topic) => {
-  const { data } = await backend.get(`/articles?topic=${topic}`);
+export const getArticleByTopic = async (topic, sortBy, sortOrder) => {
+  const { data } = await backend.get(`/articles?topic=${topic}&sort_by=${sortBy}&order=${sortOrder}`);
   return data.articles;
 };
 
