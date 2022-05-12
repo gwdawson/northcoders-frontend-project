@@ -38,7 +38,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Articles loggedIn={loggedIn} />}></Route>
         <Route path='/topics/:topic' element={<Articles loggedIn={loggedIn} />}></Route>
-        <Route path='/articles/:article_id' element={<Articles loggedIn={loggedIn} />}></Route>
+        <Route
+          path='/articles/:article_id'
+          element={<Articles loggedIn={loggedIn} user={user} />}
+        ></Route>
       </Routes>
     </div>
   );

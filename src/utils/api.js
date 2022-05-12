@@ -10,7 +10,9 @@ export const getAllArticles = async (sortBy, sortOrder) => {
 };
 
 export const getArticleByTopic = async (topic, sortBy, sortOrder) => {
-  const { data } = await backend.get(`/articles?topic=${topic}&sort_by=${sortBy}&order=${sortOrder}`);
+  const { data } = await backend.get(
+    `/articles?topic=${topic}&sort_by=${sortBy}&order=${sortOrder}`
+  );
   return data.articles;
 };
 
@@ -38,4 +40,12 @@ export const increaseVotesByOne = async (article_id) => {
 export const getAllUsers = async () => {
   const { data } = await backend.get('/users');
   return data.users;
+};
+
+export const addCommentByArticleId = async (article_id, username, comment) => {
+  const { data } = await backend.post(`/articles/${article_id}/comments`, {
+    username: username,
+    body: comment,
+  });
+  return console.log(data);
 };

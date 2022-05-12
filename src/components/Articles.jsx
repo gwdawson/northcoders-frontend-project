@@ -14,8 +14,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addCommentByArticleId } from '../utils/api';
 
-export default function Articles({ loggedIn }) {
+export default function Articles({ loggedIn, user }) {
   const { topic } = useParams();
   const { article_id } = useParams();
   const [articles, setArticles] = useState([]);
@@ -26,8 +27,10 @@ export default function Articles({ loggedIn }) {
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState('created_at');
   const [sortOrder, setSortOrder] = useState('DESC');
+  const [comment, setComment] = useState('');
 
   const notifyLike = () => toast('You must be logged in to like this article!');
+  const notifyComment = () => toast('You must be logged in to comment on this article!');
 
   useEffect(() => {
     setLoading(true);
@@ -55,6 +58,26 @@ export default function Articles({ loggedIn }) {
   function incLikes() {
     setArticle({ ...article, votes: article.votes + 1 });
     increaseVotesByOne(article_id);
+  }
+
+  function leaveAComment(e) {
+    e.preventDefault();
+    if (!loggedIn) {
+      notifyComment();
+      return;
+    }
+    setComments([
+      {
+        author: user.username,
+        body: comment,
+        comment_id: 1000000000000,
+        created_at: '1970-01-01T00:00:00.000Z',
+        votes: 0,
+      },
+      ...comments,
+    ]);
+    setComment('');
+    addCommentByArticleId(article_id, user.username, comment);
   }
 
   if (isArticle)
@@ -90,6 +113,22 @@ export default function Articles({ loggedIn }) {
         </button>
         {showComments && (
           <div className='ArticleComments'>
+            <form
+              className='CommentBox'
+              onSubmit={(e) => {
+                leaveAComment(e);
+              }}
+            >
+              <input
+                type='text'
+                comment='comment'
+                value={comment}
+                className='CommentInput'
+                placeholder='Leave a comment...'
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <input type='submit' value='Comment' className='CommentButton' />
+            </form>
             {comments.map((comment) => {
               return (
                 <div className='ArticleComment' key={comment.comment_id}>
@@ -117,7 +156,11 @@ export default function Articles({ loggedIn }) {
         <option value='comment_count'>Comment Count</option>
         <option value='votes'>Votes</option>
       </select>
-      <select value={sortOrder} className='form-select' onChange={(e) => setSortOrder(e.target.value)}>
+      <select
+        value={sortOrder}
+        className='form-select'
+        onChange={(e) => setSortOrder(e.target.value)}
+      >
         <option value='DESC'>Descending</option>
         <option value='ASC'>Ascending</option>
       </select>
