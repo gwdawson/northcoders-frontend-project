@@ -5,13 +5,14 @@ import {
   getArticleById,
   getCommentsByArticleId,
   increaseVotesByOne,
+  deleteCommentByArticleId,
 } from '../utils/api';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/App.css';
 import Tilt from 'react-parallax-tilt';
 import ReactLoading from 'react-loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faMessage, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addCommentByArticleId } from '../utils/api';
@@ -80,6 +81,13 @@ export default function Articles({ loggedIn, user }) {
     addCommentByArticleId(article_id, user.username, comment);
   }
 
+  function deleteComment(e, comment_id) {
+    e.preventDefault();
+    const newComments = comments.filter((comment) => comment.comment_id !== comment_id);
+    setComments(newComments);
+    deleteCommentByArticleId(comment_id);
+  }
+
   if (isArticle)
     return (
       <>
@@ -136,6 +144,14 @@ export default function Articles({ loggedIn, user }) {
                   <p>{comment.body}</p>
                   <p>
                     <FontAwesomeIcon icon={faThumbsUp} /> {comment.votes}
+                    {comment.author === user.username && (
+                      <button
+                        className='NoStyle'
+                        onClick={(e) => deleteComment(e, comment.comment_id)}
+                      >
+                        <FontAwesomeIcon className='DeleteCommentButton' icon={faTrash} />
+                      </button>
+                    )}
                   </p>
                 </div>
               );

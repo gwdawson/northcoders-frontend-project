@@ -49,3 +49,7 @@ export const addCommentByArticleId = async (article_id, username, comment) => {
   });
   return console.log(data);
 };
+
+export const deleteCommentByArticleId = async (comment_id) => {
+  await backend.delete(`/comments/${comment_id}`);
+};
