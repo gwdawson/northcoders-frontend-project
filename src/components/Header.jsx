@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import '../styles/App.css';
 
 export default function Header() {
