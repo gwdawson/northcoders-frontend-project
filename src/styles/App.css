@@ -127,13 +127,13 @@ html {
   border: 1px solid white;
   border-radius: 8px;
   margin-bottom: 10px;
+  margin-right: 10px;
 }
 .CommentButton {
   color: var(--text-default);
   background: transparent;
   padding: 10px;
-  margin-left: 10px;
-  width: 9%;
+  width: 10% - 10px;
   border: 1px solid white;
   border-radius: 8px;
   cursor: pointer;

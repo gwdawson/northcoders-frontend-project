@@ -29,8 +29,10 @@ export default function Articles({ loggedIn, user }) {
   const [sortBy, setSortBy] = useState('created_at');
   const [sortOrder, setSortOrder] = useState('DESC');
   const [comment, setComment] = useState('');
+  const [liked, setLiked] = useState(false);
 
   const notifyLike = () => toast('You must be logged in to like this article!');
+  const notifyAlrLike = () => toast('You have already liked this article!');
   const notifyComment = () => toast('You must be logged in to comment on this article!');
 
   useEffect(() => {
@@ -57,6 +59,7 @@ export default function Articles({ loggedIn, user }) {
   }, [topic, article_id, sortBy, sortOrder]);
 
   function incLikes() {
+    setLiked(true);
     setArticle({ ...article, votes: article.votes + 1 });
     increaseVotesByOne(article_id);
   }
@@ -106,7 +109,7 @@ export default function Articles({ loggedIn, user }) {
         <button
           className='ArticleButton'
           onClick={() => {
-            loggedIn ? incLikes() : notifyLike();
+            loggedIn ? (liked ? notifyAlrLike() : incLikes()) : notifyLike();
           }}
         >
           <FontAwesomeIcon icon={faThumbsUp} /> Leave a like!

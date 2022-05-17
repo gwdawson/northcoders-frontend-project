@@ -47,7 +47,7 @@ export const addCommentByArticleId = async (article_id, username, comment) => {
     username: username,
     body: comment,
   });
-  return console.log(data);
+  return data;
 };
 
 export const deleteCommentByArticleId = async (comment_id) => {
