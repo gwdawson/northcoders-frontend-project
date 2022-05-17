@@ -1,4 +1,4 @@
-# northcoders-news-api
+# northcoders-news-frontend
 
 ## [Live Application](https://627d2905908d420009104bf3--beautiful-fairy-5eaf8c.netlify.app/)
 
@@ -15,3 +15,7 @@ npm install
 
 npm start
 ```
+
+## Technologies
+
+- [x] Node v17.4.0
